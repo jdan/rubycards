@@ -53,11 +53,12 @@ class Card
   # draws a card picture
   def to_s
     # A simple template with numeric placeholders
+    # YY represents where the card rank will be placed
     template = <<-TPL.gsub(/^\s+/,'')
       ,-------,
       | 0 4 7 |
       | 1 5 8 |
-      | 2   9 |
+      | 2 YY9 |
       | 3 6 X |
       `-------'
     TPL
@@ -83,30 +84,26 @@ class Card
     i = 0
     pattern.each_char do |c|
       # what character in the template are we going to match?
-      # we look for whitespace surrounding the match characters
-      #   due to how the escape codes for coloring text are formed
+      # we look for whitespace after the match characters due
+      #   to how the escape codes for coloring text are formed
       if i == 10
-        match = / X /
+        match = /X /
       else
-        match = %r{ #{i} }
+        match = %r{#{i} }
       end
 
       # replace X's with glyphs
       if c == 'X'
-        if (2..10) === @rank
-          template.sub!(match, " #{suit(true)} ")
-        else
-          template.sub!(match, " #{rank(true)} ")
-        end
+        template.sub!(match, "#{suit(true)} ")
       # replace _'s with whitespaces
       else
-        template.sub!(match, '   ')
+        template.sub!(match, '  ')
       end
 
       i += 1
     end
 
-    template
+    template.sub(/YY/, rank(true).ljust(2))
   end
 
   private
