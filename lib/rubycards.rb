@@ -10,7 +10,8 @@ suits = %w{ clubs diamonds hearts spades }
 
 h = Hand.new
 5.times do
-  h.add Card.new(ranks.sample, suits.sample)
+  h << Card.new(ranks.sample, suits.sample)
 end
 
 puts h
+puts h.cards[0] < h.cards[1]

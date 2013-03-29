@@ -10,6 +10,8 @@ class Hand
     @cards << card if card.instance_of? Card
   end
 
+  alias_method :<<, :add
+
   def to_s
     @cards.map(&:to_s).inject(:next)
   end
