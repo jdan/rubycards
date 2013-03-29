@@ -12,6 +12,10 @@ class Hand
 
   alias_method :<<, :add
 
+  def [](n)
+    @cards[n]
+  end
+
   def to_s
     @cards.map(&:to_s).inject(:next)
   end

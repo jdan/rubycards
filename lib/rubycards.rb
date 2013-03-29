@@ -14,4 +14,3 @@ h = Hand.new
 end
 
 puts h
-puts h.cards[0] < h.cards[1]
