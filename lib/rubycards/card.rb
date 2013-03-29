@@ -17,10 +17,10 @@ class Card
   # returns the rank of the card
   # optional short parameter will limit face cards to one character
   def rank(short = false)
-    if (1..10) === @rank
+    if (2..10) === @rank
       @rank.to_s
     else
-      h = { 11 => 'Jack', 12 => 'Queen', 13 => 'King', 14 => 'Ace' }
+      h = { 11 => 'Jack', 12 => 'Queen', 13 => 'King', 1 => 'Ace' }
       h[@rank] && short ? h[@rank][0] : h[@rank]
     end
   end
@@ -75,7 +75,7 @@ class Card
       when 8;  pattern = 'XXXX___XXXX'
       when 9;  pattern = 'XXXX_X_XXXX'
       when 10; pattern = 'XXXXX_XXXXX'
-      when 11..14;
+      when 11..13;
         pattern = '_____X_____'
     end
 
@@ -93,7 +93,7 @@ class Card
 
       # replace X's with glyphs
       if c == 'X'
-        if (1..10) === @rank
+        if (2..10) === @rank
           template.sub!(match, " #{suit(true)} ")
         else
           template.sub!(match, " #{rank(true)} ")
@@ -114,12 +114,12 @@ class Card
   # converts the string representation of a rank to an integer
   def rank_to_i(rank)
     case rank.to_s
-      when /^(a|ace)/i;   14
+      when /^(a|ace)/i;   1
       when /^(k|king)/i;  13
       when /^(q|queen)/i; 12
       when /^(j|jack)/i;  11
       when '10';          10
-      when '1'..'9';      rank
+      when '2'..'9';      rank
       else 0
     end
   end
