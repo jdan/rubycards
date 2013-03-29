@@ -13,4 +13,5 @@ h = Hand.new
   h << Card.new(ranks.sample, suits.sample)
 end
 
+h.sort!
 puts h

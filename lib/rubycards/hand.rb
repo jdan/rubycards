@@ -16,6 +16,10 @@ class Hand
     @cards[n]
   end
 
+  def sort!
+    @cards.sort!
+  end
+
   def to_s
     @cards.map(&:to_s).inject(:next)
   end
