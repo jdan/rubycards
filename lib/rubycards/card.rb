@@ -59,56 +59,45 @@ class Card
 
   # draws a card picture
   def to_s
-    # A simple template with numeric placeholders
-    # YY represents where the card rank will be placed
+    # A simple template with X's as placeholders
+    # YY represents the placement of the card's rank
     template = <<-TPL.gsub(/^\s+/,'')
       ,-------,
-      | 0 4 7 |
-      | 1 5 8 |
-      | 2 YY9 |
-      | 3 6 X |
+      | X X X |
+      | X X X |
+      | X YYX |
+      | X X X |
       `-------'
     TPL
 
     # the patterns represent the configuration of glyphys
-    #   in the form of 0123456789X
+    #   read from left to right, top to bottom
+    # X means place a glyph, _ means clear the space
     case @rank
-      when 2;  pattern = '____X_X____'
-      when 3;  pattern = '____XXX____'
-      when 4;  pattern = 'X__X___X__X'
-      when 5;  pattern = 'X__X_X_X__X'
-      when 6;  pattern = 'XX_X___XX_X'
-      when 7;  pattern = 'X__XXXXX__X'
-      when 8;  pattern = 'XXXX___XXXX'
-      when 9;  pattern = 'XXXX_X_XXXX'
-      when 10; pattern = 'XXXXX_XXXXX'
+      when 2;  pattern = '_X_______X_'
+      when 3;  pattern = '_X__X____X_'
+      when 4;  pattern = 'X_X_____X_X'
+      when 5;  pattern = 'X_X_X___X_X'
+      when 6;  pattern = 'X_XX_X__X_X'
+      when 7;  pattern = 'X_X_X_XXX_X'
+      when 8;  pattern = 'X_XX_XXXX_X'
+      when 9;  pattern = 'X_XXXXXXX_X'
+      when 10; pattern = 'XXXX_XXXXXX'
       when 11..14;
-        pattern = '_____X_____'
+        pattern = '____X______'
     end
 
-    # String enumeration doesn't include indicies?
-    i = 0
     pattern.each_char do |c|
-      # what character in the template are we going to match?
-      # we look for whitespace after the match characters due
-      #   to how the escape codes for coloring text are formed
-      if i == 10
-        match = /X /
-      else
-        match = %r{#{i} }
-      end
-
       # replace X's with glyphs
       if c == 'X'
-        template.sub!(match, "#{suit(true)} ")
-      # replace _'s with whitespaces
+        template.sub!(/X/, "#{suit(true)}")
+      # replace _'s with whitespace
       else
-        template.sub!(match, '  ')
+        template.sub!(/X/, " ")
       end
-
-      i += 1
     end
 
+    # place the card rank (left-padded)
     template.sub(/YY/, rank(true).ljust(2))
   end
 
