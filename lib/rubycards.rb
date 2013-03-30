@@ -9,9 +9,10 @@ ranks = [*2..10, 'jack', 'queen', 'king', 'ace']
 suits = %w{ clubs diamonds hearts spades }
 
 h = Hand.new
-5.times do
-  h << Card.new(ranks.sample, suits.sample)
-end
+d = Deck.new
 
-h.sort!
+d.shuffle!
+
+h.draw(d, 5)
+
 puts h

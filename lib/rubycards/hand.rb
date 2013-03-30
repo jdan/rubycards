@@ -1,5 +1,7 @@
 class Hand
 
+  include Enumerable
+
   attr_reader :cards
 
   # initialize with an array of cards
@@ -26,6 +28,24 @@ class Hand
   # sorting
   def sort!
     @cards.sort!
+  end
+
+  # draw n cards from a deck
+  def draw(deck, n = 1)
+    n.times do
+      @cards << deck.draw unless deck.empty?
+    end
+  end
+
+  # Enumerable#each
+  def each(&block)
+    @cards.each do |card|
+      if block_given?
+        block.call card
+      else
+        yield card
+      end
+    end
   end
 
   # displaying the card icons
