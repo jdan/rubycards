@@ -84,7 +84,7 @@ class Card
       when 9;  pattern = 'X_XXXXXXX_X'
       when 10; pattern = 'XXXX_XXXXXX'
       when 11..14;
-        pattern = '____X______'
+        pattern = 'X_________X'
     end
 
     pattern.each_char do |c|
