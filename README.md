@@ -1,24 +1,29 @@
-## rubycards
+# Rubycards
 
-I just felt like writing some Ruby.
+TODO: Write a gem description
 
-![rubycards](http://jordanscales.com/rubycards.png)
+## Installation
 
-### About
+Add this line to your application's Gemfile:
 
-Rubycards is a library to emulate playing cards (cards, hands, decks). As an added bonus, you can display the cards as tiny pictures. I'm mainly doing this as an exercise to learn better Ruby organization, as well as documentation and testing. More importantly it's just fun.
+    gem 'rubycards'
 
-Feel free to peek around my code and point out anything I'm bad at.
+And then execute:
 
-### Example
+    $ bundle
 
-To see an example, run
+Or install it yourself as:
 
-    ruby lib/rubycards.rb
+    $ gem install rubycards
 
-### To do
+## Usage
 
-* Make this into a gem
-* Documentation
-* Testing
-* Some extensions for card games (poker, war, etc.)
+TODO: Write usage instructions here
+
+## Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
