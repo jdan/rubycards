@@ -21,4 +21,17 @@ describe Card do
       end
     end
   end
+
+  describe '#rank' do
+    context 'face cards' do
+      let(:king){Card.new('King','Clubs')}
+
+      it 'should return a long ranks' do
+        king.rank.should == 'King'
+      end
+      it 'should return a short rank' do
+        king.rank(true).should == 'K'
+      end
+    end
+  end
 end
