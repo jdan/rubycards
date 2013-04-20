@@ -63,10 +63,10 @@ class Card
     # YY represents the placement of the card's rank
     template = <<-TPL.gsub(/^\s+/,'')
       ╭───────╮
-      │ X X X │
-      │ X X X │
-      │ X YYX │
-      │ X X X │
+      | X X X |
+      | X X X |
+      | X YYX |
+      | X X X |
       ╰───────╯
     TPL
 
