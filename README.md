@@ -1,6 +1,6 @@
 # Rubycards
 
-TODO: Write a gem description
+A simple card implementation in Ruby.
 
 ## Installation
 
