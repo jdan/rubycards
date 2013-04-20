@@ -1,4 +1,4 @@
-require '../rubycards/card.rb'
+require 'rubycards'
 
 describe Card do
   describe '#initialize' do
@@ -16,8 +16,9 @@ describe Card do
         new_card.suit.should == 'Clubs'
 
         new_card = Card.new(3, 'Spades')
-        new_card.rank.should == 3
+        new_card.rank.should == 3.to_s
         new_card.suit.should == 'Spades'
+      end
     end
   end
 end
