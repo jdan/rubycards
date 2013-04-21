@@ -1,57 +1,61 @@
-class Hand
+# encoding: utf-8
 
-  include Enumerable
+module RubyCards
+  class Hand
 
-  attr_reader :cards
+    include Enumerable
 
-  # initialize with an array of cards
-  def initialize(cards = [])
-    @cards = []
-    cards.each do |card|
-      self << card
-    end
-  end
+    attr_reader :cards
 
-  # add a card if it is valid
-  def add(card)
-    @cards << card if card.instance_of? Card
-  end
-
-  # alias array push (<<) to add method
-  alias_method :<<, :add
-
-  # indexing
-  def [](n)
-    @cards[n]
-  end
-
-  # sorting
-  def sort!
-    @cards.sort!
-  end
-
-  # draw n cards from a deck
-  def draw(deck, n = 1)
-    n.times do
-      @cards << deck.draw unless deck.empty?
-    end
-  end
-
-  # Enumerable#each
-  def each(&block)
-    @cards.each do |card|
-      if block_given?
-        block.call card
-      else
-        yield card
+    # initialize with an array of cards
+    def initialize(cards = [])
+      @cards = []
+      cards.each do |card|
+        self << card
       end
     end
-  end
 
-  # displaying the card icons
-  # using extensions/string.rb for String#next
-  def to_s
-    @cards.map(&:to_s).inject(:next)
-  end
+    # add a card if it is valid
+    def add(card)
+      @cards << card if card.instance_of? Card
+    end
 
+    # alias array push (<<) to add method
+    alias_method :<<, :add
+
+    # indexing
+    def [](n)
+      @cards[n]
+    end
+
+    # sorting
+    def sort!
+      @cards.sort!
+    end
+
+    # draw n cards from a deck
+    def draw(deck, n = 1)
+      n.times do
+        @cards << deck.draw unless deck.empty?
+      end
+    end
+
+    # Enumerable#each
+    def each(&block)
+      @cards.each do |card|
+        if block_given?
+          block.call card
+        else
+          yield card
+        end
+      end
+    end
+
+    # displaying the card icons
+    # using extensions/string.rb for String#next
+    def to_s
+      @cards.map(&:to_s).inject(:next)
+    end
+
+  end
 end

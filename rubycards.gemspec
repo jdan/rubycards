@@ -5,7 +5,7 @@ require 'rubycards/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "rubycards"
-  gem.version       = Rubycards::VERSION
+  gem.version       = RubyCards::VERSION
   gem.authors       = ["Jordan Scales", "Joe Letizia"]
   gem.email         = ["scalesjordan@gmail.com", "joe.letizia@gmail.com"]
   gem.description   = "RubyCards"

@@ -1,5 +1,7 @@
 require 'rubycards'
 
+include RubyCards
+
 describe Card do
   describe '#initialize' do
     context 'no params' do

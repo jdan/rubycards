@@ -1,45 +1,49 @@
-class Deck
+# encoding: utf-8
 
-  include Enumerable
+module RubyCards
+  class Deck
 
-  attr_reader :cards
+    include Enumerable
 
-  RANKS = [*2..10, 'Jack', 'Queen', 'King', 'Ace']
-  SUITS = %w{ Clubs Diamonds Hearts Spades }
+    attr_reader :cards
 
-  # initialize a deck of cards using the RANKS and SUITS constants
-  def initialize
-    @cards = []
+    RANKS = [*2..10, 'Jack', 'Queen', 'King', 'Ace']
+    SUITS = %w{ Clubs Diamonds Hearts Spades }
 
-    RANKS.product(SUITS).each do |rank, suit|
-      @cards << Card.new(rank, suit)
-    end
-  end
+    # initialize a deck of cards using the RANKS and SUITS constants
+    def initialize
+      @cards = []
 
-  # shuffle the deck
-  def shuffle!
-    @cards.shuffle!
-  end
-
-  # draw a card from the deck
-  def draw
-    @cards.shift
-  end
-
-  # determines if the deck is empty
-  def empty?
-    @cards.empty?
-  end
-
-  # Enumerable#each
-  def each(&block)
-    @cards.each do |card|
-      if block_given?
-        block.call card
-      else
-        yield card
+      RANKS.product(SUITS).each do |rank, suit|
+        @cards << Card.new(rank, suit)
       end
     end
-  end
 
+    # shuffle the deck
+    def shuffle!
+      @cards.shuffle!
+    end
+
+    # draw a card from the deck
+    def draw
+      @cards.shift
+    end
+
+    # determines if the deck is empty
+    def empty?
+      @cards.empty?
+    end
+
+    # Enumerable#each
+    def each(&block)
+      @cards.each do |card|
+        if block_given?
+          block.call card
+        else
+          yield card
+        end
+      end
+    end
+
+  end
 end

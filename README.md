@@ -25,6 +25,7 @@ Or install it yourself as:
 Here's a trivial example of declaring a new deck, shuffling, and drawing 5 cards into a hand:
 
     require 'rubycards'
+    include RubyCards
 
     hand = Hand.new
     deck = Deck.new
