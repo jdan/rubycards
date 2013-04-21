@@ -20,11 +20,22 @@ Or install it yourself as:
 
     $ gem install rubycards
 
-## Usage
+## Example
 
-To see an example, run
+Here's a trivial example of declaring a new deck, shuffling, and drawing 5 cards into a hand:
 
-    ruby lib/rubycards.rb
+    require 'rubycards'
+
+    hand = Hand.new
+    deck = Deck.new
+
+    deck.shuffle!
+
+    hand.draw(deck, 5)
+
+    puts hand
+
+Which produces the image at the top of this README.
 
 ## Contributing
 
