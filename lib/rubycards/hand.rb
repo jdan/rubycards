@@ -29,6 +29,7 @@ module RubyCards
     # sorting
     def sort!
       @cards.sort!
+      self
     end
 
     # draw n cards from a deck
@@ -36,6 +37,7 @@ module RubyCards
       n.times do
         @cards << deck.draw unless deck.empty?
       end
+      self
     end
 
     # Enumerable#each
@@ -53,6 +55,12 @@ module RubyCards
     # using extensions/string.rb for String#next
     def to_s
       @cards.map(&:to_s).inject(:next)
+    end
+
+    # in the ruby console, call #inspect on each card
+    #   and join with commas
+    def inspect
+      "[ #{@cards.map(&:inspect).join ', '} ]"
     end
 
   end
