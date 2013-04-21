@@ -6,10 +6,10 @@ require 'rubycards/version'
 Gem::Specification.new do |gem|
   gem.name          = "rubycards"
   gem.version       = Rubycards::VERSION
-  gem.authors       = ["Jordan Scales","Joe Letizia"]
-  gem.email         = ["joe.letizia@gmail.com"]
+  gem.authors       = ["Jordan Scales", "Joe Letizia"]
+  gem.email         = ["scalesjordan@gmail.com", "joe.letizia@gmail.com"]
   gem.description   = "RubyCards"
-  gem.summary       = "A 52 card gem."
+  gem.summary       = "A 52 card gem"
   gem.homepage      = "https://github.com/prezjordan/rubycards"
 
   gem.files         = `git ls-files`.split($/)
