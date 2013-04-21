@@ -4,3 +4,7 @@ source 'https://rubygems.org'
 gemspec
 gem 'colored'
 gem 'rake'
+
+group :test do
+  gem 'rspec'
+end
