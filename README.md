@@ -1,5 +1,7 @@
 # Rubycards
 
+[![Build Status](https://travis-ci.org/prezjordan/rubycards.png)](https://travis-ci.org/prezjordan/rubycards)
+
 Rubycards is a library to emulate playing cards (cards, hands, decks). As an added bonus, you can display the cards as tiny pictures. I'm mainly doing this as an exercise to learn better Ruby organization, as well as documentation and testing. More importantly it's just fun.
 
 Feel free to peek around my code and point out anything I'm bad at.

@@ -102,6 +102,11 @@ module RubyCards
       template.sub(/YY/, rank(true).ljust(2))
     end
 
+    def inspect
+      #  short rank + glyph suit
+      rank(true) + suit(true)
+    end
+
     private
 
     # converts the string representation of a rank to an integer
