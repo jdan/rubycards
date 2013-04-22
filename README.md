@@ -26,17 +26,19 @@ Or install it yourself as:
 
 Here's a trivial example of declaring a new deck, shuffling, and drawing 5 cards into a hand:
 
-    require 'rubycards'
-    include RubyCards
+```ruby
+require 'rubycards'
+include RubyCards
 
-    hand = Hand.new
-    deck = Deck.new
+hand = Hand.new
+deck = Deck.new
 
-    deck.shuffle!
+deck.shuffle!
 
-    hand.draw(deck, 5)
+hand.draw(deck, 5)
 
-    puts hand
+puts hand
+```
 
 Which produces the image at the top of this README.
 
