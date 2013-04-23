@@ -1,4 +1,4 @@
-require 'rubycards'
+require 'spec_helper'
 
 include RubyCards
 
