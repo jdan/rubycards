@@ -106,4 +106,24 @@ describe Card do
     end
   end
 
+  describe '#garbage' do
+    it 'should set a garbage rank to nil' do
+      runt_card1 = Card.new(0, 'Diamonds')
+      runt_card2 = Card.new(11, 'Diamonds')
+      runt_card3 = Card.new(-6, 'Spades')
+
+      runt_card1.rank.should be_nil
+      runt_card2.rank.should be_nil
+      runt_card3.rank.should be_nil
+    end
+
+    it 'should set a garbage suit to nil' do
+      runt_card1 = Card.new(7, '')
+      runt_card2 = Card.new('Ace', 'Garbage')
+
+      runt_card1.suit.should be_nil
+      runt_card2.suit.should be_nil
+    end
+  end
+
 end
