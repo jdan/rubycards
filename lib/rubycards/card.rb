@@ -48,6 +48,8 @@ module RubyCards
       "#{rank(true)}#{suit(true)}"
     end
 
+    alias_method :inspect, :short
+
     # comparator
     def <=>(c)
       self.to_i <=> c.to_i
@@ -100,11 +102,6 @@ module RubyCards
 
       # place the card rank (left-padded)
       template.sub(/YY/, rank(true).ljust(2))
-    end
-
-    def inspect
-      #  short rank + glyph suit
-      rank(true) + suit(true)
     end
 
     private
