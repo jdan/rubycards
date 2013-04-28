@@ -1,3 +1,4 @@
+# Standard ignores
 *.gem
 *.rbc
 .bundle
@@ -7,6 +8,8 @@ Gemfile.lock
 InstalledFiles
 _yardoc
 coverage
+
+# Ignore gem stuff
 doc/
 lib/bundler/man
 pkg
@@ -16,4 +19,8 @@ test/tmp
 test/version_tmp
 tmp
 
+# No .DS_Store
 .DS_Store
+
+# Ignore the coveralls config
+.coveralls.yml
