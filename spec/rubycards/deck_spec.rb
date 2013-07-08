@@ -1,12 +1,17 @@
 require 'spec_helper'
 
-describe RubyCards::Deck do
-  subject(:deck) { RubyCards::Deck.new }
+include RubyCards
+
+describe Deck do
+  subject(:deck) { Deck.new }
 
   describe '#initialize' do
     it 'initializes 52 cards' do
       deck.cards.count.should == 52
-      deck.cards.each { |card| card.should be_a RubyCards::Card }
+      # test indexing
+      deck[0].should be_a Card
+      # test enumerability
+      deck.each { |card| card.should be_a Card }
     end
   end
 
