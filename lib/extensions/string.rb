@@ -7,11 +7,11 @@ class String
   #   cd .next( gh ) => cdgh
   def next(str)
     # zip the two strings, split by line breaks
-    zipped = self.split("\n").zip(str.split("\n")).map
+    zipped = self.split("\n").zip(str.split("\n"))
 
     # map the zipped strings, by joining each pair and ending
     #   with a new line, then joining the whole thing together
-    zipped.map { |e| "#{e.join}\n" }.join
+    zipped.map { |e| "#{e.join}" }.join "\n"
   end
 
 end
