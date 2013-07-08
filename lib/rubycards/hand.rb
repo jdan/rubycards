@@ -42,13 +42,7 @@ module RubyCards
 
     # Enumerable#each
     def each(&block)
-      @cards.each do |card|
-        if block_given?
-          block.call card
-        else
-          yield card
-        end
-      end
+      @cards.each(&block)
     end
 
     # displaying the card icons
