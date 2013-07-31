@@ -60,6 +60,8 @@ module RubyCards
       @rank
     end
 
+    alias :value, :to_i
+
     # draws a card picture
     def to_s
       # A simple template with X's as placeholders
