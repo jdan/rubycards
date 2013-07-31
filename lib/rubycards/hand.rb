@@ -40,6 +40,11 @@ module RubyCards
       self
     end
 
+    # return sum of hand
+    def sum
+      this.cards.reduce { |memo, card| memo + card.value }
+    end
+
     # Enumerable#each
     def each(&block)
       @cards.each(&block)
