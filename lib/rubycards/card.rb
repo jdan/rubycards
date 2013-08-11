@@ -2,23 +2,32 @@
 require 'colored'
 
 module RubyCards
+
+  # Class representation of a standard playing card. (French Design: 52 cards)
   class Card
 
     include Comparable
 
-    # constants for glyphs
     CLUB    = '♣'
     DIAMOND = '♦'
     HEART   = '♥'
     SPADE   = '♠'
 
+    # Returns a new card instance.
+    #
+    # @param rank [String, Integer] The rank of the card
+    # @param suit [String] The suit of the card
+    # @return [Card] The constructed card
     def initialize(rank = 'Ace', suit = 'Spades')
       @rank = rank_to_i(rank)
       @suit = suit_to_i(suit)
     end
 
-    # returns the rank of the card
-    # optional short parameter will limit face cards to one character
+    # Returns the rank of the card with an optional `short` parameter
+    # to limit face cards to one character.
+    #
+    # @param short [Boolean] Optional short setting
+    # @return [String] The string representation of the card's rank
     def rank(short = false)
       if (2..10) === @rank
         @rank.to_s
@@ -28,8 +37,11 @@ module RubyCards
       end
     end
 
-    # returns the suit of a card
-    # optional glyph parameter displays a colored unicode character
+    # Returns the suit of the card.
+    #
+    # @param glyph [Boolean] Optional setting to draw a unicode glyph in place
+    # of a word
+    # @return [String] The string (of glyph) representation of the card's suit
     def suit(glyph = false)
       case @suit
         when 1
@@ -43,24 +55,33 @@ module RubyCards
       end
     end
 
-    # returns the short rank, followed by suit icon
+    # Returns the shortened rank, followed by a suit glyph.
+    #
+    # @return [String] The short representation of the card.
     def short
       "#{rank(true)}#{suit(true)}"
     end
 
     alias_method :inspect, :short
 
-    # comparator
-    def <=>(c)
-      self.to_i <=> c.to_i
+    # Compares the card to another.
+    #
+    # @param other [Card] A card to use in comparison
+    # @return [Integer]
+    def <=>(other)
+      self.to_i <=> other.to_i
     end
 
-    # returns the numerical representation of the rank
+    # Returns the integer representation of the rank.
+    #
+    # @return [Integer] The rank of the card
     def to_i
       @rank
     end
 
-    # draws a card picture
+    # Returns the ASCII-art representation of the card.
+    #
+    # @return [String] The card drawn in ASCII characters.
     def to_s
       # A simple template with X's as placeholders
       # YY represents the placement of the card's rank
@@ -106,7 +127,10 @@ module RubyCards
 
     private
 
-    # converts the string representation of a rank to an integer
+    # Converts the string representation of a rank to an integer.
+    #
+    # @param rank [String] The rank of the card as a string
+    # @return [Integer] An integer representation of the rank (ordered)
     def rank_to_i(rank)
       case rank.to_s
         when /^(a|ace)/i;   14
@@ -119,8 +143,11 @@ module RubyCards
       end
     end
 
-    # converts the string representation of a suit to an integer
-    # suits are ordered alphabetically
+    # Converts the string representation of a suit to an integer, in
+    # alphabetical order.
+    #
+    # @param suit [String] The string representation of the suit
+    # @return [Integer] An integer representation of the suit (ordered)
     def suit_to_i(suit)
       case suit
         when /^club/i;    1
