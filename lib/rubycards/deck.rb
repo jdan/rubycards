@@ -8,7 +8,9 @@ module RubyCards
     RANKS = [*2..10, 'Jack', 'Queen', 'King', 'Ace']
     SUITS = %w{ Clubs Diamonds Hearts Spades }
 
-    # initialize a deck of cards using the RANKS and SUITS constants
+    # Initializes a standard deck of 52 cards
+    #
+    # @return [Deck] A standard deck of cards
     def initialize
       @cards = []
 
@@ -17,39 +19,55 @@ module RubyCards
       end
     end
 
-    # shuffle the deck
+    # Shuffles the deck and returns it
+    #
+    # @return [Deck] The shuffled deck
     def shuffle!
       @cards.shuffle!
       self
     end
 
-    # draw a card from the deck
+    # Draws a single card from the deck
+    #
+    # @return [Card] The drawn card
     def draw
       @cards.shift
     end
 
-    # determines if the deck is empty
+    # Determines whether or not the deck is empty
+    #
+    # @return [TrueClass, FalseClass] The deck is empty
     def empty?
       @cards.empty?
     end
 
-    # indexing
+    # Returns the nth card in the deck
+    #
+    # @param n [Integer] The index
+    # @return [Card] The card at the given index
     def [](n)
       @cards[n]
     end
 
-    # Enumerable#each
+    # Enumerates the deck
+    #
+    # @param block [Proc] The block to pass into the enumerator
+    # @return [Enumerable] The deck enumerator
     def each(&block)
       @cards.each(&block)
     end
 
-    # display concise card representations in an array
+    # Displays concise card representations in an array
+    #
+    # @return [String] The concise string representation of the deck
     def to_s
       "[ #{@cards.map(&:inspect).join ', '} ]"
     end
 
-    # in the ruby console, only show the first and last three
-    #   separated by ellipses
+    # Displays a shortened version of the #to_s method for use in the
+    # ruby console
+    #
+    # @return [String] A shortened string output of the deck
     def inspect
       "[ #{@cards[0..2].map(&:inspect).join ', '}, ..., #{@cards[-3..-1].map(&:inspect).join ', '} ]"
     end
