@@ -4,7 +4,7 @@
 
 Rubycards is a library to emulate playing cards (cards, hands, decks). As an added bonus, you can display the cards as tiny pictures. I'm mainly doing this as an exercise to learn better Ruby organization, as well as documentation and testing. More importantly it's just fun.
 
-Feel free to peek around my code and point out anything I'm bad at.
+**See the extended documentation**: [http://rubydoc.info/github/prezjordan/rubycards](http://rubydoc.info/github/prezjordan/rubycards/master/frames)
 
 ![rubycards](http://jordanscales.com/rubycards.png)
 
