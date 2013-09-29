@@ -1,9 +1,16 @@
+require 'forwardable'
+
 module RubyCards
   class Hand
 
     include Enumerable
+    extend Forwardable
 
     attr_reader :cards
+
+    def_delegators :cards, :<<, :[]
+
+    alias :add :<<
 
     # Initializes a hand of cards
     #
@@ -14,25 +21,6 @@ module RubyCards
       cards.each do |card|
         self << card
       end
-    end
-
-    # Adds a card to the hand
-    #
-    # @param card [Card] The card to add to the hand
-    # @return [Hand] The new hand
-    def add(card)
-      @cards << card if card.instance_of? Card
-    end
-
-    # alias array push (<<) to add method
-    alias_method :<<, :add
-
-    # Returns the nth card in the hand
-    #
-    # @param n [Integer] The index of the hand
-    # @return [Card] The card at the nth index
-    def [](n)
-      @cards[n]
     end
 
     # Sorts the hand and returns it

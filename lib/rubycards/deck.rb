@@ -1,9 +1,16 @@
+require 'forwardable'
+
 module RubyCards
   class Deck
 
     include Enumerable
+    extend Forwardable
 
     attr_reader :cards
+
+    def_delegators :cards, :empty?, :[], :shift
+
+    alias :draw :shift
 
     RANKS = [*2..10, 'Jack', 'Queen', 'King', 'Ace']
     SUITS = %w{ Clubs Diamonds Hearts Spades }
@@ -25,28 +32,6 @@ module RubyCards
     def shuffle!
       @cards.shuffle!
       self
-    end
-
-    # Draws a single card from the deck
-    #
-    # @return [Card] The drawn card
-    def draw
-      @cards.shift
-    end
-
-    # Determines whether or not the deck is empty
-    #
-    # @return [TrueClass, FalseClass] The deck is empty
-    def empty?
-      @cards.empty?
-    end
-
-    # Returns the nth card in the deck
-    #
-    # @param n [Integer] The index
-    # @return [Card] The card at the given index
-    def [](n)
-      @cards[n]
     end
 
     # Enumerates the deck
