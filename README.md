@@ -1,10 +1,10 @@
 # Rubycards
 
-[![Build Status](https://travis-ci.org/prezjordan/rubycards.png)](https://travis-ci.org/prezjordan/rubycards) [![Coverage Status](https://coveralls.io/repos/prezjordan/rubycards/badge.png?branch=master)](https://coveralls.io/r/prezjordan/rubycards)
+[![Build Status](https://travis-ci.org/jdan/rubycards.png)](https://travis-ci.org/jdan/rubycards) [![Coverage Status](https://coveralls.io/repos/prezjordan/rubycards/badge.png?branch=master)](https://coveralls.io/r/prezjordan/rubycards)
 
 Rubycards is a library to emulate playing cards (cards, hands, decks). As an added bonus, you can display the cards as tiny pictures. I'm mainly doing this as an exercise to learn better Ruby organization, as well as documentation and testing. More importantly it's just fun.
 
-**See the extended documentation**: [http://rubydoc.info/github/prezjordan/rubycards](http://rubydoc.info/github/prezjordan/rubycards/master/frames)
+**See the extended documentation**: [http://rubydoc.info/github/jdan/rubycards](http://rubydoc.info/github/jdan/rubycards/master/frames)
 
 ![rubycards](http://jordanscales.com/rubycards.png)
 
