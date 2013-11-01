@@ -8,6 +8,7 @@ Coveralls.wear!
 # loaded once.
 
 require 'rubycards'
+require 'json'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
