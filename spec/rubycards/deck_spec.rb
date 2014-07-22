@@ -40,13 +40,13 @@ describe Deck do
     context 'empty deck' do
       it 'returns true' do
         deck.cards.count.times { deck.draw }
-        deck.empty?.should be_true
+        expect(deck).to be_empty
       end
     end
 
     context 'full deck' do
       it 'returns false' do
-        deck.empty?.should be_false
+        expect(deck).not_to be_empty
       end
     end
   end
