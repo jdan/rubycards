@@ -13,6 +13,14 @@ describe Deck do
       # test enumerability
       deck.each { |card| card.should be_a Card }
     end
+
+    describe "jokers" do
+      subject(:deck) { Deck.new include_jokers: true }
+
+      it "initialize 54 cards" do
+        deck.cards.count.should == 54
+      end
+    end
   end
 
   describe '#shuffle!' do

@@ -17,12 +17,18 @@ module RubyCards
 
     # Initializes a standard deck of 52 cards
     #
+    # @param options [Hash] A set of options to consider
     # @return [Deck] A standard deck of cards
-    def initialize
+    def initialize(options = {})
       @cards = []
 
       RANKS.product(SUITS).each do |rank, suit|
         @cards << Card.new(rank, suit)
+      end
+
+      if options.any?
+        @cards << Object.new
+        @cards << Object.new
       end
     end
 
