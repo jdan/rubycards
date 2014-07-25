@@ -30,7 +30,7 @@ module RubyCards
     #
     # @return [Deck] The shuffled deck
     def shuffle!
-      @cards = nil
+      @cards.shuffle!
       self
     end
 

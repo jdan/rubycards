@@ -22,6 +22,12 @@ describe Deck do
       deck.cards.should_not == cards_before_shuffling
     end
 
+    it "should should shuffle the internal cards array" do
+      cards_before_shuffling = deck.cards.dup
+      expect(deck.instance_variable_get("@cards")).to receive(:shuffle!)
+      deck.shuffle!
+    end
+
     it 'returns itself' do
       should == deck.shuffle!
     end
