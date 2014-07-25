@@ -53,6 +53,11 @@ describe Deck do
 
   describe "#cut!" do
     context 'cutting the first card' do
+
+      it 'returns itself' do
+        should == deck.cut!(0)
+      end
+
       it 'cuts the cards' do
         cards_before_cutting = deck.cards.dup
 

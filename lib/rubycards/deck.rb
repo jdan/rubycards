@@ -40,6 +40,7 @@ module RubyCards
     # @return [Deck] The cut deck
     def cut!(index)
       (0..index).each { @cards << @cards.shift }
+      self
     end
 
     # Enumerates the deck
