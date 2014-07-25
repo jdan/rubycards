@@ -24,6 +24,14 @@ describe Deck do
       it "should include two jokers" do
         deck.cards.select { |x| x.joker? }.count.should == 2
       end
+
+      it "should include a red joker" do
+        deck.cards.select { |x| x.joker == 'Red' }.count.should == 1
+      end
+
+      it "should include a black joker" do
+        deck.cards.select { |x| x.joker == 'Black' }.count.should == 1
+      end
     end
   end
 
