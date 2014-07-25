@@ -126,4 +126,24 @@ describe Card do
     end
   end
 
+  describe "#same_as?" do
+    it "should return true when the two different cards with the same suit/rank match" do
+      deck1 = Deck.new
+      deck2 = Deck.new
+      deck1.cards.each_with_index do |_, index|
+        deck1[index].same_as?(deck2[index]).should == true
+        deck2[index].same_as?(deck1[index]).should == true
+      end
+    end
+
+    it "should return false when compared to different cards" do
+      deck1 = Deck.new
+      deck2 = Deck.new
+      deck1.cards.each_with_index do |_, index|
+        deck1[index].same_as?(deck2[index-1]).should == false
+        deck2[index].same_as?(deck1[index-1]).should == false
+      end
+    end
+  end
+
 end
