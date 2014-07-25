@@ -13,6 +13,23 @@ describe Deck do
       # test enumerability
       deck.each { |card| card.should be_a Card }
     end
+
+    it "initializes four suits" do
+      suits = deck.cards.group_by { |c| c.suit }
+      suits.count.should == 4
+    end
+
+    ["Clubs", "Diamonds", "Hearts", "Spades"].each do |suit|
+      it "initializes 13 cards for #{suit}" do
+        cards = deck.cards.select { |c| c.suit == suit }
+        cards.count.should == 13
+      end
+
+      it "should include ranks of different ranks" do
+        cards = deck.cards.select { |c| c.suit == suit }
+        cards.group_by { |x| x.rank }.count.should == 13
+      end
+    end
   end
 
   describe '#shuffle!' do
