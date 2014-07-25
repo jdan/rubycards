@@ -8,6 +8,8 @@ module RubyCards
 
     include Comparable
 
+    attr_reader :joker
+
     CLUB    = '♣'
     DIAMOND = '♦'
     HEART   = '♥'
@@ -17,10 +19,19 @@ module RubyCards
     #
     # @param rank [String, Integer] The rank of the card
     # @param suit [String] The suit of the card
+    # @param joker [String] The value of the joker, if the card is a joker
     # @return [Card] The constructed card
-    def initialize(rank = 'Ace', suit = 'Spades')
+    def initialize(rank = 'Ace', suit = 'Spades', joker = nil)
       @rank = rank_to_i(rank)
       @suit = suit_to_i(suit)
+      @joker = joker
+    end
+
+    # Returns true if the card is a joker.
+    #
+    # @return [Boolean] true if the card is a joker, otherwise false
+    def joker?
+      @joker
     end
 
     # Returns the rank of the card with an optional `short` parameter

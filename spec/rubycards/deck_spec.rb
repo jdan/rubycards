@@ -20,6 +20,10 @@ describe Deck do
       it "initialize 54 cards" do
         deck.cards.count.should == 54
       end
+
+      it "should include two jokers" do
+        deck.cards.select { |x| x.joker? }.count.should == 2
+      end
     end
   end
 

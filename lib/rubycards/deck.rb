@@ -27,8 +27,8 @@ module RubyCards
       end
 
       if options.any?
-        @cards << Object.new
-        @cards << Object.new
+        @cards << Card.new(nil, nil, true)
+        @cards << Card.new(nil, nil, true)
       end
     end
 
