@@ -89,6 +89,18 @@ describe Card do
         num.rank.should == num.rank(true)
       end
     end
+
+    context 'jokers' do
+      let (:num) { Card.new(nil, nil, 'Red') }
+
+      it "should return a long rank" do
+        num.rank.should == 'Red Joker'
+      end
+
+      it "should return a short rank" do
+        num.rank(true).should == 'Joker'
+      end
+    end
   end
 
   describe '#display' do

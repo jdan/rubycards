@@ -42,6 +42,8 @@ module RubyCards
     def rank(short = false)
       if (2..10) === @rank
         @rank.to_s
+      elsif @joker
+        short ? "Joker" : "#{@joker} Joker"
       else
         h = { 11 => 'Jack', 12 => 'Queen', 13 => 'King', 14 => 'Ace' }
         h[@rank] && short ? h[@rank][0] : h[@rank]
