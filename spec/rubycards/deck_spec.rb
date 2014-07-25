@@ -67,4 +67,57 @@ describe Deck do
       end
     end
   end
+
+  describe "#cut!" do
+    context 'cutting the first card' do
+
+      it 'returns itself' do
+        should == deck.cut!(0)
+      end
+
+      it 'cuts the cards' do
+        cards_before_cutting = deck.cards.dup
+
+        deck.cut!(0)
+
+        deck.cards[0].suit.should == cards_before_cutting[1].suit
+        deck.cards[0].rank.should == cards_before_cutting[1].rank
+
+        deck.cards[-1].suit.should == cards_before_cutting[0].suit
+        deck.cards[-1].rank.should == cards_before_cutting[0].rank
+      end
+
+      it 'should return the same number of cards' do
+        cards_before_cutting = deck.cards.dup
+
+        deck.cut!(0)
+
+        deck.cards.count.should == cards_before_cutting.count
+      end
+    end
+
+    context 'cutting the second card' do
+      it 'cuts the cards' do
+        cards_before_cutting = deck.cards.dup
+
+        deck.cut!(1)
+
+        deck.cards[0].suit.should == cards_before_cutting[2].suit
+        deck.cards[0].rank.should == cards_before_cutting[2].rank
+
+        deck.cards[-2].suit.should == cards_before_cutting[0].suit
+        deck.cards[-2].rank.should == cards_before_cutting[0].rank
+        deck.cards[-1].suit.should == cards_before_cutting[1].suit
+        deck.cards[-1].rank.should == cards_before_cutting[1].rank
+      end
+
+      it 'should return the same number of cards' do
+        cards_before_cutting = deck.cards.dup
+
+        deck.cut!(1)
+
+        deck.cards.count.should == cards_before_cutting.count
+      end
+    end
+  end
 end

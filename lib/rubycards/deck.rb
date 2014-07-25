@@ -34,6 +34,15 @@ module RubyCards
       self
     end
 
+    # Cuts the deck and returns it
+    #
+    # @param index [Integer] The index of the card that will be cut
+    # @return [Deck] The cut deck
+    def cut!(index)
+      (0..index).each { @cards << @cards.shift }
+      self
+    end
+
     # Enumerates the deck
     #
     # @param block [Proc] The block to pass into the enumerator
