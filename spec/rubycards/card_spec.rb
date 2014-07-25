@@ -29,6 +29,16 @@ describe Card do
         new_card.rank.should == 7.to_s
         new_card.suit.should == 'Hearts'
       end
+
+      describe 'jokers' do
+        it "should allow a third parameter to define the type of Joker" do
+          red_joker = Card.new(nil, nil, 'Red')
+          red_joker.joker.should == 'Red'
+
+          black_joker = Card.new(nil, nil, 'Black')
+          black_joker.joker.should == 'Black'
+        end
+      end
     end
   end
 
