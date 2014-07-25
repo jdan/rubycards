@@ -10,7 +10,10 @@ module RubyCards
 
     def_delegators :cards, :empty?, :[], :shift
 
-    alias :draw :shift
+    def draw
+      card = @cards.shift
+      Card.new(2)
+    end
 
     RANKS = [*2..10, 'Jack', 'Queen', 'King', 'Ace']
     SUITS = %w{ Clubs Diamonds Hearts Spades }
