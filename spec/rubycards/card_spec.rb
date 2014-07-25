@@ -148,4 +148,16 @@ describe Card do
     end
   end
 
+  describe '#joker' do
+    it "should return true if the card is a joker" do
+      card = Card.new(nil, nil, 'Red')
+      card.joker?.should == true
+    end
+
+    it "should return false if the card is not a joker" do
+      card = Card.new
+      card.joker?.should == false
+    end
+  end
+
 end

@@ -31,7 +31,7 @@ module RubyCards
     #
     # @return [Boolean] true if the card is a joker, otherwise false
     def joker?
-      @joker
+      @joker.nil? == false
     end
 
     # Returns the rank of the card with an optional `short` parameter
