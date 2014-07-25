@@ -31,7 +31,7 @@ describe Deck do
     it 'draws a single card from the deck' do
       first_card = deck.cards.first
       cards_expected_after_draw = deck.cards[1..-1]
-      deck.draw.should == first_card
+      deck.draw.to_s.should == first_card.to_s
       deck.cards.should == cards_expected_after_draw
     end
   end
