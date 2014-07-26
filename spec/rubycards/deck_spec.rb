@@ -7,27 +7,27 @@ describe Deck do
 
   describe '#initialize' do
     it 'initializes 52 cards' do
-      deck.cards.count.should == 52
+      expect(deck.cards.count).to eq 52
       # test indexing
-      deck[0].should be_a Card
+      expect(deck[0]).to be_a Card
       # test enumerability
-      deck.each { |card| card.should be_a Card }
+      deck.each { |card| expect(card).to be_a Card }
     end
 
     it "initializes four suits" do
       suits = deck.cards.group_by { |c| c.suit }
-      suits.count.should == 4
+      expect(suits.count).to be 4
     end
 
     ["Clubs", "Diamonds", "Hearts", "Spades"].each do |suit|
       it "initializes 13 cards for #{suit}" do
         cards = deck.cards.select { |c| c.suit == suit }
-        cards.count.should == 13
+        expect(cards.count).to be 13
       end
 
       it "should include ranks of different ranks" do
         cards = deck.cards.select { |c| c.suit == suit }
-        cards.group_by { |x| x.rank }.count.should == 13
+        expect(cards.group_by { |x| x.rank }.count).to be 13
       end
     end
   end
@@ -36,17 +36,16 @@ describe Deck do
     it 'shuffles the cards' do
       cards_before_shuffling = deck.cards.dup
       deck.shuffle!
-      deck.cards.should_not == cards_before_shuffling
+      expect(deck.cards).not_to eq cards_before_shuffling
     end
 
     it "should should shuffle the internal cards array" do
-      cards_before_shuffling = deck.cards.dup
       expect(deck.instance_variable_get("@cards")).to receive(:shuffle!)
       deck.shuffle!
     end
 
     it 'returns itself' do
-      should == deck.shuffle!
+      expect(deck).to eq deck.shuffle!
     end
   end
 
@@ -54,8 +53,8 @@ describe Deck do
     it 'draws a single card from the deck' do
       first_card = deck.cards.first
       cards_expected_after_draw = deck.cards[1..-1]
-      deck.draw.same_as?(first_card).should == true
-      deck.cards.should == cards_expected_after_draw
+      expect(deck.draw).to be_same_as first_card
+      expect(deck.cards).to eq cards_expected_after_draw
     end
   end
 
@@ -78,6 +77,7 @@ describe Deck do
     context 'cutting the first card' do
 
       it 'returns itself' do
+        expect(deck).to eq deck.cut!(0)
         should == deck.cut!(0)
       end
 
@@ -86,11 +86,11 @@ describe Deck do
 
         deck.cut!(0)
 
-        deck.cards[0].suit.should == cards_before_cutting[1].suit
-        deck.cards[0].rank.should == cards_before_cutting[1].rank
+        expect(deck.cards[0].suit).to eq cards_before_cutting[1].suit
+        expect(deck.cards[0].rank).to eq cards_before_cutting[1].rank
 
-        deck.cards[-1].suit.should == cards_before_cutting[0].suit
-        deck.cards[-1].rank.should == cards_before_cutting[0].rank
+        expect(deck.cards[-1].suit).to eq cards_before_cutting[0].suit
+        expect(deck.cards[-1].rank).to eq cards_before_cutting[0].rank
       end
 
       it 'should return the same number of cards' do
@@ -98,7 +98,7 @@ describe Deck do
 
         deck.cut!(0)
 
-        deck.cards.count.should == cards_before_cutting.count
+        expect(deck.cards.count).to eq cards_before_cutting.count
       end
     end
 
@@ -108,13 +108,13 @@ describe Deck do
 
         deck.cut!(1)
 
-        deck.cards[0].suit.should == cards_before_cutting[2].suit
-        deck.cards[0].rank.should == cards_before_cutting[2].rank
+        expect(deck.cards[0].suit).to eq cards_before_cutting[2].suit
+        expect(deck.cards[0].rank).to eq cards_before_cutting[2].rank
 
-        deck.cards[-2].suit.should == cards_before_cutting[0].suit
-        deck.cards[-2].rank.should == cards_before_cutting[0].rank
-        deck.cards[-1].suit.should == cards_before_cutting[1].suit
-        deck.cards[-1].rank.should == cards_before_cutting[1].rank
+        expect(deck.cards[-2].suit).to eq cards_before_cutting[0].suit
+        expect(deck.cards[-2].rank).to eq cards_before_cutting[0].rank
+        expect(deck.cards[-1].suit).to eq cards_before_cutting[1].suit
+        expect(deck.cards[-1].rank).to eq cards_before_cutting[1].rank
       end
 
       it 'should return the same number of cards' do
@@ -122,7 +122,7 @@ describe Deck do
 
         deck.cut!(1)
 
-        deck.cards.count.should == cards_before_cutting.count
+        expect(deck.cards.count).to eq cards_before_cutting.count
       end
     end
   end
