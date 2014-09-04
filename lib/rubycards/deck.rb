@@ -16,12 +16,17 @@ module RubyCards
     SUITS = %w{ Clubs Diamonds Hearts Spades }
 
     # Initializes a standard deck of 52 cards
+    # options:
+    #   :exclude_rank
+    #     eg. Deck.new(exclude_rank: [2,'Jack'])
+    #     will excludes the 8 cards of the 2 and Jack rank
     #
     # @return [Deck] A standard deck of cards
-    def initialize
+    def initialize(options={})
       @cards = []
+      options[:exclude_rank] ||= []
 
-      RANKS.product(SUITS).each do |rank, suit|
+      (RANKS - options[:exclude_rank]).product(SUITS).each do |rank, suit|
         @cards << Card.new(rank, suit)
       end
     end
