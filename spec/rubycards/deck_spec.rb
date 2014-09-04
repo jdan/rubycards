@@ -155,4 +155,16 @@ describe Deck do
       end
     end
   end
+
+  context 'multiple_decks' do
+    let (:deck_2_decks) { Deck.new(number_decks: 2) }
+    it('initializes 104 cards') { expect(deck_2_decks.cards.count).to eq 104 }
+    it('unique of decks should be 52') {expect(deck_2_decks.cards.map(&:short).uniq.count).to eq 52}
+  end
+
+  context 'multiple_decks and excluded cards' do
+    let (:deck_2_decks_excluding_2) { Deck.new(number_decks: 2, exclude_rank: [5, 'Jack']) }
+    it('initializes 96 cards') { expect(deck_2_decks_excluding_2.cards.count).to eq 88 }
+    it('unique of decks should be 48') {expect(deck_2_decks_excluding_2.cards.map(&:short).uniq.count).to eq 44}
+  end
 end
