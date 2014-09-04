@@ -42,6 +42,22 @@ puts hand
 
 Which produces the image at the top of this README.
 
+Here's a second example showing 2 decks, with the 2 and Jacks removed, shuffling, and drawing 10 cards into a hand:
+
+```ruby
+require 'rubycards'
+include RubyCards
+
+hand = Hand.new
+deck = Deck.new(number_decks: 2, exclude_rank: [2, 'Jack'])
+
+deck.shuffle!
+
+hand.draw(deck, 10)
+
+puts hand
+```
+
 ## Contributing
 
 1. Fork it

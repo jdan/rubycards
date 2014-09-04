@@ -126,4 +126,45 @@ describe Deck do
       end
     end
   end
+
+  describe 'excluded cards' do
+    let (:deck_excluding_1) { Deck.new(exclude_rank: [5]) }
+    let (:deck_excluding_2) { Deck.new(exclude_rank: [5,7]) }
+    let (:deck_excluding_3) { Deck.new(exclude_rank: [5, 'Jack', 'Ace']) }
+
+    describe '#initialize' do
+      # Remove one card rank from deck
+      it('initializes 48 cards') { expect(deck_excluding_1.cards.count).to eq 48 }
+      it "doesn't include the excluded_rank in deck" do
+        expect(deck_excluding_1.map(&:to_i)).not_to include(5)
+        expect(deck_excluding_1.cards.count).to eq 48
+
+      end
+      # Remove two card ranks from deck
+      it('initializes 44 cards') { expect(deck_excluding_2.cards.count).to eq 44 }
+      it "doesn't include the excluded_rank in deck" do
+        expect(deck_excluding_2.map(&:to_i)).not_to include(5)
+        expect(deck_excluding_2.map(&:to_i)).not_to include(7)
+      end
+      # Remove three card ranks from deck, including 2 picture cards
+      it('initializes 40 cards') { expect(deck_excluding_3.cards.count).to eq 40 }
+      it "doesn't include the excluded_rank in deck" do
+        expect(deck_excluding_3.map(&:to_i)).not_to include(5)
+        expect(deck_excluding_3.map(&:to_i)).not_to include(11)
+        expect(deck_excluding_3.map(&:to_i)).not_to include(14)
+      end
+    end
+  end
+
+  context 'multiple_decks' do
+    let (:deck_2_decks) { Deck.new(number_decks: 2) }
+    it('initializes 104 cards') { expect(deck_2_decks.cards.count).to eq 104 }
+    it('unique of decks should be 52') {expect(deck_2_decks.cards.map(&:short).uniq.count).to eq 52}
+  end
+
+  context 'multiple_decks and excluded cards' do
+    let (:deck_2_decks_excluding_2) { Deck.new(number_decks: 2, exclude_rank: [5, 'Jack']) }
+    it('initializes 96 cards') { expect(deck_2_decks_excluding_2.cards.count).to eq 88 }
+    it('unique of decks should be 48') {expect(deck_2_decks_excluding_2.cards.map(&:short).uniq.count).to eq 44}
+  end
 end
