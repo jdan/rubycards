@@ -26,6 +26,9 @@ module RubyCards
     #   :exclude_cards
     #     eg. Deck.new(exclude_cards: ['5S', 'JackH', 'AceD']
     #     will exclude 3 cards 5 Spades, Jack Hearts and the Ace Diamonds
+    #   :exclude_suit
+    #     eg. Deck.new(exclude_suit: ['Hearts', 'Spades']
+    #     will exclude 26 cards, All Hearts and Spades
     #
     # @return [Deck] A standard deck of cards
     def initialize(options={})
@@ -33,10 +36,11 @@ module RubyCards
       options[:exclude_rank] ||= []
       options[:number_decks] ||= 1
       options[:exclude_cards] ||= []
+      options[:exclude_suit] ||= []
 
       options[:number_decks].times do
         (RANKS - options[:exclude_rank]).product(SUITS).each do |rank, suit|
-          unless excluded_card(options[:exclude_cards], rank, suit)
+          unless excluded_card(options[:exclude_cards], rank, suit) || (options[:exclude_suit].include? suit)
             @cards << Card.new(rank, suit)
           end
         end

@@ -186,11 +186,33 @@ describe Deck do
     end
   end
 
-  describe 'various options and combinations' do
+  describe 'exclude suit' do
+    let (:deck_excluding_1_suit) { Deck.new(exclude_suit: ['Hearts']) }
+    let (:deck_excluding_2_suits) { Deck.new(exclude_suit: ['Hearts', 'Spades']) }
+    let (:jack_hearts) { Card.new('Jack','Hearts') }
+    let (:five_spades) { Card.new(5,'Spades') }
+
+    describe '#initialize' do
+      # Remove one suit deck
+      it('initializes 39 cards') { expect(deck_excluding_1_suit.cards.count).to eq 39 }
+      it('does not include the Jack Hearts in deck') { expect(deck_excluding_1_suit.map(&:short)).not_to include(jack_hearts.short) }
+    end
+
+    # Remove two suits from deck
+    it('initializes 26 cards') { expect(deck_excluding_2_suits.cards.count).to eq 26 }
+    it "doesn't include the excluded suits in deck" do
+      expect(deck_excluding_2_suits.map(&:short)).not_to include(five_spades.short)
+      expect(deck_excluding_2_suits.map(&:short)).not_to include(jack_hearts.short)
+    end
+  end
+
+    describe 'various options and combinations' do
     let (:deck_2_decks) { Deck.new(number_decks: 2) }
     let (:deck_2_decks_excluding_2_ranks) { Deck.new(number_decks: 2, exclude_rank: [5, 'Jack']) }
     let (:deck_2_decks_excluding_2_cards) { Deck.new(number_decks: 2, exclude_cards: ['5S', 'JackH']) }
+    let (:deck_2_decks_excluding_2_suits) { Deck.new(number_decks: 2, exclude_suit: ['Hearts', 'Spades']) }
     let (:deck_2_decks_excluding_1_rank_2_cards) { Deck.new(number_decks: 2, exclude_rank: [3], exclude_cards: ['5S', 'JackH']) }
+    let (:deck_2_decks_excluding_1_rank_1_suit_2_cards) { Deck.new(number_decks: 2, exclude_rank: [3], exclude_suit: ['Hearts'], exclude_cards: ['5S', 'JackH']) }
     let (:five_spades) { Card.new(5,'Spades') }
     let (:jack_hearts) { Card.new('Jack','Hearts') }
 
@@ -200,7 +222,7 @@ describe Deck do
     end
 
     context 'multiple_decks and excluded ranks' do
-      it('initializes 96 cards') { expect(deck_2_decks_excluding_2_ranks.cards.count).to eq 88 }
+      it('initializes 88 cards') { expect(deck_2_decks_excluding_2_ranks.cards.count).to eq 88 }
       it('unique of decks should be 48') {expect(deck_2_decks_excluding_2_ranks.cards.map(&:short).uniq.count).to eq 44}
     end
 
@@ -209,11 +231,25 @@ describe Deck do
       it('unique of decks should be 50') {expect(deck_2_decks_excluding_2_cards.cards.map(&:short).uniq.count).to eq 50}
     end
 
+    context 'multiple_decks and excluded suits' do
+      it('initializes 52 cards') { expect(deck_2_decks_excluding_2_suits.cards.count).to eq 52 }
+      it('unique of decks should be 26') {expect(deck_2_decks_excluding_2_suits.cards.map(&:short).uniq.count).to eq 26}
+      it('should not include the 5 of spades' ) {expect(deck_2_decks_excluding_2_suits.map(&:short)).not_to include(five_spades.short)}
+      it('should not include the Jack of Hearts' ) {expect(deck_2_decks_excluding_2_suits.map(&:short)).not_to include(jack_hearts.short)}
+    end
+
     context 'multiple_decks, 1 excluded rank and 2 excluded cards' do
       it('initializes 92 cards') { expect(deck_2_decks_excluding_1_rank_2_cards.cards.count).to eq 92 }
       it('unique of decks should be 46') {expect(deck_2_decks_excluding_1_rank_2_cards.cards.map(&:short).uniq.count).to eq 46}
       it('should not include the 5 of spades' ) {expect(deck_2_decks_excluding_1_rank_2_cards.map(&:short)).not_to include(five_spades.short)}
       it('should not include the Jack of Hearts' ) {expect(deck_2_decks_excluding_1_rank_2_cards.map(&:short)).not_to include(jack_hearts.short)}
+    end
+
+    context 'multiple_decks, 1 excluded rank, 1 excluded suit and 2 excluded cards' do
+      it('initializes 70 cards') { expect(deck_2_decks_excluding_1_rank_1_suit_2_cards.cards.count).to eq 70 }
+      it('unique of decks should be 35') {expect(deck_2_decks_excluding_1_rank_1_suit_2_cards.cards.map(&:short).uniq.count).to eq 35}
+      it('should not include the 5 of spades' ) {expect(deck_2_decks_excluding_1_rank_1_suit_2_cards.map(&:short)).not_to include(five_spades.short)}
+      it('should not include the Jack of Hearts' ) {expect(deck_2_decks_excluding_1_rank_1_suit_2_cards.map(&:short)).not_to include(jack_hearts.short)}
     end
   end
 end
