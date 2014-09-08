@@ -42,14 +42,14 @@ puts hand
 
 Which produces the image at the top of this README.
 
-Here's a second example showing 2 decks, with the 2 and Jacks removed, shuffling, and drawing 10 cards into a hand:
+Here's a second example showing 2 decks, with the 2 and Jacks removed, 5 Hearts and Ace Spades removed, shuffling, and drawing 10 cards into a hand:
 
 ```ruby
 require 'rubycards'
 include RubyCards
 
 hand = Hand.new
-deck = Deck.new(number_decks: 2, exclude_rank: [2, 'Jack'])
+deck = Deck.new(number_decks: 2, exclude_rank: [2, 'Jack'], exclude_cards: [Card.new(5,'Hearts'), Card.new('Ace','Spades')])
 
 deck.shuffle!
 
