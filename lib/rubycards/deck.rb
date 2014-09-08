@@ -24,7 +24,7 @@ module RubyCards
     #     eg. Deck.new(exclude_rank: [2,'Jack'])
     #     will exclude 8 cards of the 2 and Jack rank
     #   :exclude_cards
-    #     eg. Deck.new(exclude_cards: ['5S', 'JackH', 'AceD']
+    #     e.g. Deck.new(exclude_cards: [Card.new(5,'Spades'), Card.new('Jack','Hearts'), Card.new('Ace','Diamonds')])
     #     will exclude 3 cards 5 Spades, Jack Hearts and the Ace Diamonds
     #   :exclude_suit
     #     eg. Deck.new(exclude_suit: ['Hearts', 'Spades']
@@ -89,8 +89,7 @@ module RubyCards
 
     def excluded_card(excluded_cards, rank, suit)
       #check if card is in the excluded hash
-      check_card = rank.to_s + suit[0,1]
-      if excluded_cards.include? check_card
+      if excluded_cards.map(&:short).include? Card.new(rank, suit).short
         true
       else
         false

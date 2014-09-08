@@ -49,7 +49,7 @@ require 'rubycards'
 include RubyCards
 
 hand = Hand.new
-deck = Deck.new(number_decks: 2, exclude_rank: [2, 'Jack'], exclude_cards: ['5H', 'AceS'])
+deck = Deck.new(number_decks: 2, exclude_rank: [2, 'Jack'], exclude_cards: [Card.new(5,'Hearts'), Card.new('Ace','Spades')])
 
 deck.shuffle!
 

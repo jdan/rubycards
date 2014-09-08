@@ -156,12 +156,12 @@ describe Deck do
   end
 
   describe 'excluded singular cards' do
-    let (:deck_excluding_1_card) { Deck.new(exclude_cards: ['5S']) }
-    let (:deck_excluding_2_cards) { Deck.new(exclude_cards: ['5S', 'JackH']) }
-    let (:deck_excluding_3_cards) { Deck.new(exclude_cards: ['5S', 'JackH', 'AceD']) }
     let (:five_spades) { Card.new(5,'Spades') }
     let (:jack_hearts) { Card.new('Jack','Hearts') }
     let (:ace_diamonds) { Card.new('Ace','Diamonds') }
+    let (:deck_excluding_1_card) { Deck.new(exclude_cards: [five_spades]) }
+    let (:deck_excluding_2_cards) { Deck.new(exclude_cards: [five_spades, jack_hearts]) }
+    let (:deck_excluding_3_cards) { Deck.new(exclude_cards: [five_spades, jack_hearts, ace_diamonds]) }
 
     describe '#initialize' do
       # Remove one card from deck
@@ -207,14 +207,14 @@ describe Deck do
   end
 
     describe 'various options and combinations' do
-    let (:deck_2_decks) { Deck.new(number_decks: 2) }
-    let (:deck_2_decks_excluding_2_ranks) { Deck.new(number_decks: 2, exclude_rank: [5, 'Jack']) }
-    let (:deck_2_decks_excluding_2_cards) { Deck.new(number_decks: 2, exclude_cards: ['5S', 'JackH']) }
-    let (:deck_2_decks_excluding_2_suits) { Deck.new(number_decks: 2, exclude_suit: ['Hearts', 'Spades']) }
-    let (:deck_2_decks_excluding_1_rank_2_cards) { Deck.new(number_decks: 2, exclude_rank: [3], exclude_cards: ['5S', 'JackH']) }
-    let (:deck_2_decks_excluding_1_rank_1_suit_2_cards) { Deck.new(number_decks: 2, exclude_rank: [3], exclude_suit: ['Hearts'], exclude_cards: ['5S', 'JackH']) }
     let (:five_spades) { Card.new(5,'Spades') }
     let (:jack_hearts) { Card.new('Jack','Hearts') }
+    let (:deck_2_decks) { Deck.new(number_decks: 2) }
+    let (:deck_2_decks_excluding_2_ranks) { Deck.new(number_decks: 2, exclude_rank: [5, 'Jack']) }
+    let (:deck_2_decks_excluding_2_cards) { Deck.new(number_decks: 2, exclude_cards: [five_spades, jack_hearts]) }
+    let (:deck_2_decks_excluding_2_suits) { Deck.new(number_decks: 2, exclude_suit: ['Hearts', 'Spades']) }
+    let (:deck_2_decks_excluding_1_rank_2_cards) { Deck.new(number_decks: 2, exclude_rank: [3], exclude_cards: [five_spades, jack_hearts]) }
+    let (:deck_2_decks_excluding_1_rank_1_suit_2_cards) { Deck.new(number_decks: 2, exclude_rank: [3], exclude_suit: ['Hearts'], exclude_cards: [five_spades, jack_hearts]) }
 
     context 'multiple_decks' do
       it('initializes 104 cards') { expect(deck_2_decks.cards.count).to eq 104 }
