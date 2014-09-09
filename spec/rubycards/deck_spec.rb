@@ -30,6 +30,26 @@ describe Deck do
         expect(cards.group_by { |x| x.rank }.count).to be 13
       end
     end
+
+    describe "jokers" do
+      subject(:deck) { Deck.new include_jokers: true }
+
+      it "initialize 54 cards" do
+        deck.cards.count.should == 54
+      end
+
+      it "should include two jokers" do
+        deck.cards.select { |x| x.joker? }.count.should == 2
+      end
+
+      it "should include a red joker" do
+        deck.cards.select { |x| x.joker == 'Red' }.count.should == 1
+      end
+
+      it "should include a black joker" do
+        deck.cards.select { |x| x.joker == 'Black' }.count.should == 1
+      end
+    end
   end
 
   describe '#shuffle!' do

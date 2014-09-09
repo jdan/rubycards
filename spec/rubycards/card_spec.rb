@@ -30,6 +30,16 @@ describe Card do
         expect(new_card.rank).to eq '7'
         expect(new_card.suit).to eq 'Hearts'
       end
+
+      describe 'jokers' do
+        it "should allow a third parameter to define the type of Joker" do
+          red_joker = Card.new(nil, nil, 'Red')
+          red_joker.joker.should == 'Red'
+
+          black_joker = Card.new(nil, nil, 'Black')
+          black_joker.joker.should == 'Black'
+        end
+      end
     end
   end
 
@@ -78,6 +88,18 @@ describe Card do
 
       it 'should have the same long and short rank' do
         expect(num.rank).to eq num.rank(true)
+      end
+    end
+
+    context 'jokers' do
+      let (:num) { Card.new(nil, nil, 'Red') }
+
+      it "should return a long rank" do
+        num.rank.should == 'Red Joker'
+      end
+
+      it "should return a short rank" do
+        num.rank(true).should == 'Joker'
       end
     end
   end
@@ -145,6 +167,18 @@ describe Card do
         expect(deck1[index]).not_to be_same_as deck2[index-1]
         expect(deck2[index]).not_to be_same_as deck1[index-1]
       end
+    end
+  end
+
+  describe '#joker' do
+    it "should return true if the card is a joker" do
+      card = Card.new(nil, nil, 'Red')
+      card.joker?.should == true
+    end
+
+    it "should return false if the card is not a joker" do
+      card = Card.new
+      card.joker?.should == false
     end
   end
 

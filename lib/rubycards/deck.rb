@@ -24,6 +24,7 @@ module RubyCards
     #     eg. Deck.new(exclude_rank: [2,'Jack'])
     #     will exclude 8 cards of the 2 and Jack rank
     #
+    # @param options [Hash] A set of options to consider
     # @return [Deck] A standard deck of cards
     def initialize(options={})
       @cards = []
@@ -33,6 +34,11 @@ module RubyCards
       options[:number_decks].times do
         (RANKS - options[:exclude_rank]).product(SUITS).each do |rank, suit|
           @cards << Card.new(rank, suit)
+      end
+
+      if options[:include_jokers]
+        @cards << Card.new(nil, nil, 'Red')
+        @cards << Card.new(nil, nil, 'Black')
         end
       end
     end
