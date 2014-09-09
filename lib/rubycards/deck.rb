@@ -36,7 +36,7 @@ module RubyCards
           @cards << Card.new(rank, suit)
       end
 
-      if options.any?
+      if options[:include_jokers]
         @cards << Card.new(nil, nil, 'Red')
         @cards << Card.new(nil, nil, 'Black')
         end
