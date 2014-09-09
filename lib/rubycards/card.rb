@@ -138,6 +138,10 @@ module RubyCards
       template.sub(/YY/, rank(true).ljust(2))
     end
 
+    def same_as?(card)
+      self.suit == card.suit && self.rank == card.rank
+    end
+
     private
 
     # Converts the string representation of a rank to an integer.

@@ -6,28 +6,29 @@ describe Card do
   describe '#initialize' do
     context 'no params' do
       it 'should return the ace of spades' do
-        subject.suit.should == 'Spades'
-        subject.rank.should == 'Ace'
+        new_card = Card.new
+        expect(new_card.suit).to eq 'Spades'
+        expect(new_card.rank).to eq 'Ace'
       end
     end
 
     context 'params' do
       it 'should return the card specified in params' do
         new_card = Card.new('Queen', 'Clubs')
-        new_card.rank.should == 'Queen'
-        new_card.suit.should == 'Clubs'
+        expect(new_card.rank).to eq 'Queen'
+        expect(new_card.suit).to eq 'Clubs'
 
         new_card = Card.new(3, 'Spades')
-        new_card.rank.should == 3.to_s
-        new_card.suit.should == 'Spades'
+        expect(new_card.rank).to eq '3'
+        expect(new_card.suit).to eq 'Spades'
 
         new_card = Card.new('Jack', 'Diamonds')
-        new_card.rank.should == 'Jack'
-        new_card.suit.should == 'Diamonds'
+        expect(new_card.rank).to eq 'Jack'
+        expect(new_card.suit).to eq 'Diamonds'
 
         new_card = Card.new(7, 'Hearts')
-        new_card.rank.should == 7.to_s
-        new_card.suit.should == 'Hearts'
+        expect(new_card.rank).to eq '7'
+        expect(new_card.suit).to eq 'Hearts'
       end
 
       describe 'jokers' do
@@ -52,20 +53,20 @@ describe Card do
     let (:c4) { Card.new(4,'Spades') }
 
     it 'should reflect the correct rank when compared' do
-      king.should > queen
-      king.should > jack
-      king.should == king
-      king.should < ace
+      expect(king).to be > queen
+      expect(king).to be > jack
+      expect(king).to eq king
+      expect(king).to be < ace
 
-      jack.should_not > queen
-      jack.should_not > ace
-      jack.should < queen
+      expect(jack).not_to be > queen
+      expect(jack).not_to be > ace
+      expect(jack).to be < queen
 
-      ace.should_not < queen
-      ace.should > c4
+      expect(ace).not_to be < queen
+      expect(ace).to be > c4
 
-      c2.should < c4
-      c2_heart.should == c2
+      expect(c2).to be < c4
+      expect(c2_heart).to eq c2
     end
   end
 
@@ -74,11 +75,11 @@ describe Card do
       let (:king) { Card.new('King', 'Clubs') }
 
       it 'should return a long rank' do
-        king.rank.should == 'King'
+        expect(king.rank).to eq 'King'
       end
 
       it 'should return a short rank' do
-        king.rank(true).should == 'K'
+        expect(king.rank(true)).to eq 'K'
       end
     end
 
@@ -86,7 +87,7 @@ describe Card do
       let (:num) { Card.new(10, 'Diamonds') }
 
       it 'should have the same long and short rank' do
-        num.rank.should == num.rank(true)
+        expect(num.rank).to eq num.rank(true)
       end
     end
 
@@ -107,14 +108,15 @@ describe Card do
     BORDER_COUNT = 18 # the number of unicode characters on the border
     RANKS = [*2..10, 'Jack', 'Queen', 'King', 'Ace']
 
-    it 'should have the correct number of glyps' do
+    it 'should have the correct number of glyphs' do
       RANKS.each do |rank|
         card = Card.new(rank, 'hearts')   # rspec doesn't play nice with dark cards
+        glyph_count = card.to_s.scan(/[^\x00-\x7F]/).count
 
         if (2..10).include? card.rank.to_i
-          card.to_s.scan(/[^\x00-\x7F]/).count.should == card.rank.to_i + BORDER_COUNT
+          expect(glyph_count).to eq card.rank.to_i + BORDER_COUNT
         else
-          card.to_s.scan(/[^\x00-\x7F]/).count.should == 2 + BORDER_COUNT
+          expect(glyph_count).to eq 2 + BORDER_COUNT
         end
       end
     end
@@ -123,7 +125,7 @@ describe Card do
       RANKS.each do |rank|
         card = Card.new(rank, 'diamonds')
 
-        card.inspect.should == card.short
+        expect(card.inspect).to eq card.short
       end
     end
   end
@@ -134,17 +136,37 @@ describe Card do
       runt_card2 = Card.new(11, 'Diamonds')
       runt_card3 = Card.new(-6, 'Spades')
 
-      runt_card1.rank.should be_nil
-      runt_card2.rank.should be_nil
-      runt_card3.rank.should be_nil
+      expect(runt_card1.rank).to be_nil
+      expect(runt_card2.rank).to be_nil
+      expect(runt_card3.rank).to be_nil
     end
 
     it 'should set a garbage suit to nil' do
       runt_card1 = Card.new(7, '')
       runt_card2 = Card.new('Ace', 'Garbage')
 
-      runt_card1.suit.should be_nil
-      runt_card2.suit.should be_nil
+      expect(runt_card1.suit).to be_nil
+      expect(runt_card2.suit).to be_nil
+    end
+  end
+
+  describe "#same_as?" do
+    it "should return true when the two different cards with the same suit/rank match" do
+      deck1 = Deck.new
+      deck2 = Deck.new
+      deck1.cards.each_with_index do |_, index|
+        expect(deck1[index]).to be_same_as deck2[index]
+        expect(deck2[index]).to be_same_as deck1[index]
+      end
+    end
+
+    it "should return false when compared to different cards" do
+      deck1 = Deck.new
+      deck2 = Deck.new
+      deck1.cards.each_with_index do |_, index|
+        expect(deck1[index]).not_to be_same_as deck2[index-1]
+        expect(deck2[index]).not_to be_same_as deck1[index-1]
+      end
     end
   end
 
