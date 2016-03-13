@@ -30,6 +30,11 @@ describe Deck do
         expect(cards.group_by { |x| x.rank }.count).to be 13
       end
     end
+
+    it 'should successfully initialize a deck with 2 jokers' do
+      new_deck = Deck.new(number_jokers: 2)
+      expect(new_deck.cards.count).to eq(54)
+    end
   end
 
   describe '#shuffle!' do
