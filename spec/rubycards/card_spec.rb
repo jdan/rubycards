@@ -30,6 +30,12 @@ describe Card do
         expect(new_card.rank).to eq '7'
         expect(new_card.suit).to eq 'Hearts'
       end
+
+      it 'should successfully generate a Joker card' do
+        new_card = Card.new("Joker", 'jo')
+        expect(new_card.rank).to eq('Joker')
+        expect(new_card.suit).to eq(nil)
+      end
     end
   end
 

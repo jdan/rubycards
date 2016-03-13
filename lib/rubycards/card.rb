@@ -32,7 +32,7 @@ module RubyCards
       if (2..10) === @rank
         @rank.to_s
       else
-        h = { 11 => 'Jack', 12 => 'Queen', 13 => 'King', 14 => 'Ace' }
+        h = { 11 => 'Jack', 12 => 'Queen', 13 => 'King', 14 => 'Ace' , 15 => 'Joker'}
         h[@rank] && short ? h[@rank][0] : h[@rank]
       end
     end
@@ -137,6 +137,7 @@ module RubyCards
     # @return [Integer] An integer representation of the rank (ordered)
     def rank_to_i(rank)
       case rank.to_s
+      when /^(jo|joker)/i;  15
         when /^(a|ace)/i;   14
         when /^(k|king)/i;  13
         when /^(q|queen)/i; 12

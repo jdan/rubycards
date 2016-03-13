@@ -15,6 +15,7 @@ module RubyCards
     RANKS = [*2..10, 'Jack', 'Queen', 'King', 'Ace']
     SUITS = %w{ Clubs Diamonds Hearts Spades }
 
+    SPECIAL_RANKS = ['Joker']
     # Initializes a standard deck of 52 cards
     # options:
     #   :number_decks
@@ -29,11 +30,16 @@ module RubyCards
       @cards = []
       options[:exclude_rank] ||= []
       options[:number_decks] ||= 1
+      options[:number_jokers] ||= 0
 
       options[:number_decks].times do
         (RANKS - options[:exclude_rank]).product(SUITS).each do |rank, suit|
           @cards << Card.new(rank, suit)
         end
+      end
+
+      options[:number_jokers].times do
+        @cards << Card.new('Joker', 'joker')
       end
     end
 
